@@ -21,7 +21,13 @@ app.config.suppress_callback_exceptions = True
 
 # Load data from csv
 def load_data():
-    # To do: Completar la función 
+    # Lee el CSV y convierte 'time' a datetime
+    df = pd.read_csv("datos_energia.csv", parse_dates=["time"])
+    # Usa 'time' como índice
+    df.set_index("time", inplace=True)
+    # (Opcional) ordena por fecha, por si acaso
+    df.sort_index(inplace=True)
+    return df
     
 
 # Cargar datos
@@ -240,4 +246,4 @@ def update_output_div(date, hour, proy):
 
 # Run the server
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run(debug=True)
